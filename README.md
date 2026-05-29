@@ -53,4 +53,4 @@ python -m http.server 8000
 
 ## Contact
 
-contact@aetherforge.ai
+contact@aetherforge.bond
