@@ -1,56 +1,48 @@
 # AetherForge
 
-**AetherForge** is an AI agent platform — one place to design, orchestrate, and
-deploy multi-model AI agents, from quantitative trading to automated content
-creation.
+**Crypto strategy research & tooling for independent traders and quants.**
 
-This repository contains the marketing landing page for the product, built as a
-single static HTML file and hosted on **GitHub Pages**.
+AetherForge is an independent, self-funded **early-stage project** based in Japan.
+It provides research and tooling — **not financial advice**, and it never executes
+trades or holds funds. The site is currently a landing page with an **early-access
+waitlist**.
 
-## Use cases
+Live site: **https://aetherforge.bond** · Contact: **contact@aetherforge.bond**
 
-- **AI Quantitative Trading Agents** — agents that ingest market data, evaluate signals, and execute strategies within defined guardrails.
-- **Automated Content Creation** — research → draft → review pipelines that turn briefs into on-brand assets at scale.
-- **Multi-Model Agent Orchestration** — coordinate specialized agents across providers, routing each step to the best-suited model.
+## What it does
 
-## Project structure
+- **Backtesting** — test strategies on historical data with transparent fees, slippage, and assumptions (with limitations stated).
+- **Signal monitoring** — track indicators and strategy states on a dashboard, with alerts. Informational only.
+- **Risk reports** — drawdown, volatility, exposure, and scenario breakdowns.
+- **Data pipelines** — curated, reproducible market & on-chain data feeding research and backtests.
+- **Strategy research subscriptions** — follow research strategies and get notified on state changes. No auto-trading, no custody.
+
+## Pages
 
 ```
-.
-├── index.html   # Single-page site (HTML + CSS + a little JS, no build step)
-└── README.md
+index.html       Homepage
+disclaimer.html  Risk Disclaimer / Not Financial Advice
+privacy.html     Privacy Policy
+terms.html       Terms of Service (governed by the laws of Japan)
+contact.html     Contact + project identity
+style.css        Shared styles
+CNAME            Custom domain (aetherforge.bond)
 ```
 
-There is **no build step and no dependencies** — everything is inlined in
-`index.html`, so the page works the moment it is served.
+No build step and no dependencies — plain static HTML/CSS, hosted on **GitHub Pages**.
 
 ## Run locally
 
-Just open the file in a browser:
-
 ```bash
-# macOS
-open index.html
-# Windows
-start index.html
+python -m http.server 8000   # then open http://localhost:8000
 ```
 
-Or serve it with any static server, e.g.:
+## Deploy
 
-```bash
-python -m http.server 8000
-# then visit http://localhost:8000
-```
+Push to the `main` branch; GitHub Pages serves it at the custom domain `aetherforge.bond`.
 
-## Deploy (GitHub Pages)
+## Important
 
-1. Push this folder to a GitHub repository.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-4. Select branch `main` and folder `/ (root)`, then **Save**.
-5. Wait ~1 minute; your site goes live at
-   `https://<username>.github.io/<repository>/`.
-
-## Contact
-
-contact@aetherforge.bond
+AetherForge is for **research and educational purposes only** and is **not
+financial, investment, or trading advice**. Crypto assets are high-risk. See
+[Risk Disclaimer](disclaimer.html).

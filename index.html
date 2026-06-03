@@ -3,500 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AetherForge — The platform for building autonomous AI agents</title>
-  <meta name="description" content="AetherForge is an AI agent platform to design, orchestrate, and deploy multi-model AI agents — from quantitative trading to automated content creation." />
+  <title>AetherForge — Crypto strategy research & tooling</title>
+  <meta name="description" content="AetherForge is a research-and-tooling platform for independent crypto traders and quants: backtesting, signal monitoring, risk reports, data pipelines, and strategy research. Early access — join the waitlist." />
   <meta name="theme-color" content="#0b1020" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="AetherForge — Build autonomous AI agents" />
-  <meta property="og:description" content="Design, orchestrate, and deploy multi-model AI agents in one platform." />
+  <meta property="og:title" content="AetherForge — Crypto strategy research & tooling" />
+  <meta property="og:description" content="Backtesting, signal monitoring, risk reports, and data pipelines for independent crypto traders. Research & educational tools — not financial advice." />
   <meta property="og:type" content="website" />
-
-  <!-- Inline SVG favicon: no external request, no 404 -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M16 6 L25 24 H7 Z' fill='none' stroke='white' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <style>
-    :root {
-      --bg: #ffffff;
-      --bg-dark: #0b1020;
-      --ink: #0f172a;
-      --muted: #5b6473;
-      --line: #e8eaf0;
-      --brand: #6366f1;
-      --brand-2: #8b5cf6;
-      --accent: #22d3ee;
-      --card: #ffffff;
-      --radius: 18px;
-      --maxw: 1140px;
-      --shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.18);
-      --shadow-lg: 0 24px 60px -20px rgba(79, 70, 229, 0.35);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
-    section { padding: 96px 0; }
-    .eyebrow {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--brand);
-      background: rgba(99, 102, 241, 0.08);
-      border: 1px solid rgba(99, 102, 241, 0.18);
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin-bottom: 18px;
-    }
-    h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 16px; }
-    h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; }
-    h3 { font-size: 20px; font-weight: 700; }
-    p.lead { font-size: 18px; color: var(--muted); max-width: 640px; }
-    .grad-text {
-      background: linear-gradient(120deg, #818cf8, #c4b5fd 45%, #67e8f9);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-weight: 600; font-size: 15px;
-      padding: 13px 22px; border-radius: 12px;
-      border: 1px solid transparent; cursor: pointer;
-      transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      color: #fff;
-      background: linear-gradient(120deg, var(--brand), var(--brand-2));
-      box-shadow: var(--shadow-lg);
-    }
-    .btn-primary:hover { transform: translateY(-2px); }
-    .btn-ghost {
-      color: var(--ink);
-      background: #fff;
-      border-color: var(--line);
-    }
-    .btn-ghost:hover { border-color: #cbd2e0; transform: translateY(-2px); }
-    .btn-on-dark { color: #fff; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); }
-    .btn-on-dark:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
-
-    /* Nav */
-    header.nav {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: saturate(180%) blur(12px);
-      -webkit-backdrop-filter: saturate(180%) blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
-    .brand .mark {
-      width: 30px; height: 30px; border-radius: 9px;
-      background: linear-gradient(120deg, var(--brand), var(--brand-2));
-      display: grid; place-items: center; box-shadow: var(--shadow-lg);
-    }
-    .brand .mark svg { width: 17px; height: 17px; }
-    .nav-links { display: flex; align-items: center; gap: 30px; }
-    .nav-links a.link { color: var(--muted); font-weight: 500; font-size: 15px; }
-    .nav-links a.link:hover { color: var(--ink); }
-    .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
-    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 4px 0; border-radius: 2px; }
-
-    /* Hero */
-    .hero {
-      position: relative; overflow: hidden;
-      background:
-        radial-gradient(900px 500px at 80% -10%, rgba(139, 92, 246, 0.30), transparent 60%),
-        radial-gradient(700px 500px at 5% 10%, rgba(34, 211, 238, 0.18), transparent 55%),
-        linear-gradient(180deg, #0b1020, #0d1330);
-      color: #eef1fb;
-      padding: 110px 0 120px;
-    }
-    .hero::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(800px 480px at 60% 0%, #000 30%, transparent 75%);
-      -webkit-mask-image: radial-gradient(800px 480px at 60% 0%, #000 30%, transparent 75%);
-    }
-    .hero .container { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
-    .hero .eyebrow { color: #c7cdf7; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
-    .hero h1 { font-size: clamp(36px, 5.2vw, 60px); font-weight: 800; }
-    .hero p.lead { color: #b8c0db; font-size: 19px; max-width: 540px; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 40px; color: #aab2cf; font-size: 14px; }
-    .hero-meta b { color: #fff; font-weight: 700; }
-    .hero-meta .dot { color: var(--accent); }
-
-    /* Hero visual: faux orchestration panel (decorative) */
-    .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px; padding: 18px;
-      box-shadow: 0 30px 80px -30px rgba(0,0,0,0.65);
-      backdrop-filter: blur(6px);
-    }
-    .panel-bar { display: flex; align-items: center; gap: 7px; padding: 4px 4px 14px; }
-    .panel-bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a4570; display: block; }
-    .panel-bar i:nth-child(1){ background:#ff5f57;} .panel-bar i:nth-child(2){ background:#febc2e;} .panel-bar i:nth-child(3){ background:#28c840;}
-    .panel-bar span { margin-left: auto; font-size: 12px; color: #8b94bd; }
-    .node {
-      display: flex; align-items: center; gap: 12px;
-      background: rgba(13, 19, 48, 0.55);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 12px; padding: 12px 14px; margin: 10px 0;
-    }
-    .node .ic { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; flex: none; font-size: 16px; }
-    .node .ic.a { background: linear-gradient(120deg,#6366f1,#8b5cf6); }
-    .node .ic.b { background: linear-gradient(120deg,#0ea5e9,#22d3ee); }
-    .node .ic.c { background: linear-gradient(120deg,#f59e0b,#f97316); }
-    .node .t { font-size: 14px; font-weight: 600; color: #eef1fb; }
-    .node .s { font-size: 12px; color: #9aa3c7; }
-    .node .badge { margin-left: auto; font-size: 11px; font-weight: 600; color: #22d3ee; background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.25); padding: 3px 9px; border-radius: 999px; }
-    .connector { height: 14px; width: 2px; background: linear-gradient(#6366f1, transparent); margin: -4px auto -2px 30px; }
-
-    /* Generic section heading block */
-    .section-head { max-width: 720px; margin-bottom: 52px; }
-    .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-
-    /* About / feature highlights */
-    .about { background: linear-gradient(180deg, #ffffff, #fafbff); border-bottom: 1px solid var(--line); }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .feature {
-      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 26px; box-shadow: var(--shadow);
-    }
-    .feature .fic {
-      width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 16px;
-      background: rgba(99,102,241,0.10); color: var(--brand);
-    }
-    .feature p { color: var(--muted); margin: 0; font-size: 15px; }
-
-    /* Use cases */
-    .cases .grid-3 { gap: 24px; }
-    .case {
-      position: relative; overflow: hidden;
-      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 28px; box-shadow: var(--shadow);
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .case:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(99,102,241,0.35); }
-    .case .tag { position: absolute; top: 20px; right: 20px; font-size: 12px; font-weight: 600; color: var(--muted); }
-    .case .cic {
-      width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 18px; color: #fff;
-    }
-    .case.one .cic { background: linear-gradient(120deg,#6366f1,#8b5cf6); }
-    .case.two .cic { background: linear-gradient(120deg,#0ea5e9,#22d3ee); }
-    .case.three .cic { background: linear-gradient(120deg,#f59e0b,#f97316); }
-    .case p { color: var(--muted); font-size: 15px; }
-    .case ul { margin: 16px 0 0; padding: 0; list-style: none; }
-    .case li { font-size: 14px; color: var(--ink); padding-left: 24px; position: relative; margin: 8px 0; }
-    .case li::before { content: "✓"; position: absolute; left: 0; color: var(--brand); font-weight: 700; }
-
-    /* Stats / built for production strip */
-    .strip { background: #0b1020; color: #eef1fb; }
-    .strip .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .stat { text-align: left; }
-    .stat .k { font-size: 16px; font-weight: 700; color: #fff; }
-    .stat .v { font-size: 14px; color: #aab2cf; margin-top: 4px; }
-    .stat .ic { color: var(--accent); margin-bottom: 10px; }
-
-    /* Contact */
-    .contact { background: linear-gradient(180deg, #fafbff, #ffffff); }
-    .contact-card {
-      position: relative; overflow: hidden;
-      background:
-        radial-gradient(600px 300px at 90% 0%, rgba(139,92,246,0.35), transparent 60%),
-        linear-gradient(120deg, #111733, #1b2150);
-      color: #fff; border-radius: 26px;
-      padding: 56px; text-align: center;
-      box-shadow: var(--shadow-lg);
-    }
-    .contact-card h2 { color: #fff; }
-    .contact-card p { color: #c2c9e6; max-width: 560px; margin: 0 auto 28px; font-size: 18px; }
-    .contact-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .email-pill {
-      display: inline-flex; align-items: center; gap: 10px; margin-top: 26px;
-      font-size: 15px; color: #e7eafe;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
-      padding: 10px 18px; border-radius: 999px;
-    }
-
-    /* Footer */
-    footer.site {
-      border-top: 1px solid var(--line); padding: 44px 0; background: #fff;
-    }
-    .foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .foot .muted { color: var(--muted); font-size: 14px; }
-    .foot-links { display: flex; gap: 24px; }
-    .foot-links a { color: var(--muted); font-size: 14px; }
-    .foot-links a:hover { color: var(--ink); }
-
-    /* Mobile */
-    @media (max-width: 900px) {
-      section { padding: 72px 0; }
-      .hero { padding: 84px 0 90px; }
-      .hero .container { grid-template-columns: 1fr; gap: 44px; }
-      .hero-visual { order: 2; }
-      .grid-3 { grid-template-columns: 1fr; }
-      .strip .grid-4 { grid-template-columns: 1fr 1fr; }
-      .nav-links {
-        position: absolute; top: 68px; left: 0; right: 0;
-        flex-direction: column; align-items: stretch; gap: 0;
-        background: #fff; border-bottom: 1px solid var(--line);
-        padding: 8px 24px 18px; display: none;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links a.link { padding: 12px 0; border-bottom: 1px solid var(--line); }
-      .nav-links .btn { margin-top: 12px; justify-content: center; }
-      .nav-toggle { display: block; }
-      .contact-card { padding: 40px 24px; }
-    }
-    @media (max-width: 520px) {
-      .strip .grid-4 { grid-template-columns: 1fr; }
-      .hero-meta { gap: 16px; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- NAV -->
   <header class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#top" aria-label="AetherForge home">
-        <span class="mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L21 21 H3 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg>
-        </span>
+      <a class="brand" href="/" aria-label="AetherForge home">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L21 21 H3 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
         AetherForge
       </a>
       <nav class="nav-links" id="navLinks">
-        <a class="link" href="#about">About</a>
-        <a class="link" href="#use-cases">Use Cases</a>
-        <a class="link" href="#contact">Contact</a>
-        <a class="btn btn-primary" href="mailto:contact@aetherforge.bond">Request access</a>
+        <a class="link" href="#product">Product</a>
+        <a class="link" href="#how">How it works</a>
+        <a class="link" href="disclaimer.html">Risk Disclaimer</a>
+        <a class="link" href="contact.html">Contact</a>
+        <a class="btn btn-primary" href="mailto:contact@aetherforge.bond?subject=Join%20the%20AetherForge%20waitlist">Join the waitlist</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main id="top">
-
+  <main>
     <!-- HERO -->
     <section class="hero">
       <div class="container">
-        <div class="hero-copy">
-          <span class="eyebrow">AI Agent Platform</span>
-          <h1>The platform for building <span class="grad-text">autonomous AI agents</span></h1>
-          <p class="lead">
-            AetherForge gives teams one place to design, orchestrate, and deploy
-            multi-model AI agents — from quantitative trading to automated content
-            creation — without the glue code, vendor lock-in, or operational overhead.
-          </p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="mailto:contact@aetherforge.bond">Request early access</a>
-            <a class="btn btn-on-dark" href="#use-cases">Explore use cases →</a>
-          </div>
-          <div class="hero-meta">
-            <span><span class="dot">●</span> <b>Model-agnostic</b> by design</span>
-            <span><span class="dot">●</span> <b>API-first</b> architecture</span>
-            <span><span class="dot">●</span> <b>Built</b> for production</span>
-          </div>
+        <span class="eyebrow">Crypto strategy research · early access</span>
+        <h1>Research, backtest, and monitor crypto strategies — <span class="grad-text">with evidence, not vibes.</span></h1>
+        <p class="lead">AetherForge is a research-and-tooling platform for independent crypto traders and quants: data pipelines, transparent backtests, signal monitoring, and risk reports. Test your ideas with real data — and stay fully in control of your own decisions.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="mailto:contact@aetherforge.bond?subject=Join%20the%20AetherForge%20waitlist">Join the early-access waitlist</a>
+          <a class="btn btn-on-dark" href="#how">See how it works →</a>
         </div>
-
-        <!-- Decorative product visual -->
-        <div class="hero-visual">
-          <div class="panel" role="img" aria-label="Illustration of an agent orchestration workflow">
-            <div class="panel-bar"><i></i><i></i><i></i><span>orchestration · run #1024</span></div>
-            <div class="node">
-              <div class="ic a" aria-hidden="true">◆</div>
-              <div><div class="t">Planner agent</div><div class="s">Decomposes the task</div></div>
-              <span class="badge">GPT-class</span>
-            </div>
-            <div class="connector"></div>
-            <div class="node">
-              <div class="ic b" aria-hidden="true">⛁</div>
-              <div><div class="t">Data &amp; tools</div><div class="s">Live feeds · APIs · DB</div></div>
-              <span class="badge">connected</span>
-            </div>
-            <div class="connector"></div>
-            <div class="node">
-              <div class="ic c" aria-hidden="true">⚡</div>
-              <div><div class="t">Executor agent</div><div class="s">Acts within guardrails</div></div>
-              <span class="badge">running</span>
-            </div>
-          </div>
-        </div>
+        <p class="hero-note">We're pre-launch. Join the waitlist and we'll email you when early access opens.</p>
+        <div><span class="badge-line">Educational research tools · not financial advice</span></div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="about" id="about">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">About</span>
-          <h2>From prototype to production agents</h2>
-          <p class="lead">
-            AetherForge is an AI agent platform that helps developers and teams move
-            agents out of notebooks and into the real world. Compose agents across
-            multiple foundation models, connect them to your data and tools, and run
-            them reliably at scale — all from a unified environment. Our mission is to
-            make autonomous, multi-model agents practical for every team.
-          </p>
-        </div>
-        <div class="grid-3">
-          <div class="feature">
-            <div class="fic" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 0-7 7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
-            </div>
-            <h3>Multi-model by design</h3>
-            <p>Route each step to the model best suited for the job. Mix providers freely and avoid lock-in to a single vendor.</p>
-          </div>
-          <div class="feature">
-            <div class="fic" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2"/></svg>
-            </div>
-            <h3>Tools &amp; data connectors</h3>
-            <p>Give agents access to APIs, databases, and live data streams so they can act on real, current information.</p>
-          </div>
-          <div class="feature">
-            <div class="fic" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
-            </div>
-            <h3>Observability &amp; control</h3>
-            <p>Trace every run, evaluate outputs, and enforce guardrails — so you can ship agents you actually trust.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- USE CASES -->
-    <section class="cases" id="use-cases">
+    <!-- PRODUCT -->
+    <section id="product">
       <div class="container">
         <div class="section-head center">
-          <span class="eyebrow">Use Cases</span>
-          <h2>One platform, many agents</h2>
-          <p class="lead" style="margin-left:auto;margin-right:auto;">
-            Teams build on AetherForge across very different domains. Here are three
-            workflows our platform is designed for.
-          </p>
+          <span class="eyebrow">What it does</span>
+          <h2>Everything you need to test an idea</h2>
+          <p class="lead" style="margin:0 auto;">Five building blocks for evidence-based crypto research. AetherForge gives you the tools — you keep the decisions.</p>
         </div>
-        <div class="grid-3">
-          <!-- 1 -->
-          <article class="case one">
-            <span class="tag">01</span>
-            <div class="cic" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><path d="M14 7h6v6"/></svg>
-            </div>
-            <h3>AI Quantitative Trading Agents</h3>
-            <p>Deploy agents that ingest market data, evaluate signals, and execute strategies within guardrails you define.</p>
-            <ul>
-              <li>Real-time data ingestion</li>
-              <li>Backtest &amp; iterate transparently</li>
-              <li>Risk limits and human-in-the-loop</li>
-            </ul>
+        <div class="grid">
+          <article class="card">
+            <div class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 3 5-6"/></svg></div>
+            <h3>Backtesting</h3>
+            <p>Test strategies against historical market &amp; on-chain data with transparent fees, slippage, and assumptions. Every report shows its methodology <em>and</em> its limitations.</p>
           </article>
-          <!-- 2 -->
-          <article class="case two">
-            <span class="tag">02</span>
-            <div class="cic" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7-4-4-7 7-1 5z"/><path d="M14 6l4 4"/></svg>
-            </div>
-            <h3>Automated Content Creation</h3>
-            <p>Turn briefs into finished, on-brand assets by chaining research, drafting, and review agents end to end.</p>
-            <ul>
-              <li>Research → draft → review pipelines</li>
-              <li>Brand voice and style controls</li>
-              <li>Publish at scale</li>
-            </ul>
+          <article class="card">
+            <div class="ic b" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 5 4-12 2 7h6"/></svg></div>
+            <h3>Signal monitoring</h3>
+            <p>Track the indicators and strategy states you care about on a dashboard, with alerts when they change. Informational only — you decide and execute yourself.</p>
           </article>
-          <!-- 3 -->
-          <article class="case three">
-            <span class="tag">03</span>
-            <div class="cic" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M6 8.5v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3M12 13.5v2"/></svg>
-            </div>
-            <h3>Multi-Model Agent Orchestration</h3>
-            <p>Coordinate specialized agents across providers, where each step runs on the model best suited to the task.</p>
-            <ul>
-              <li>Compose multi-agent workflows</li>
-              <li>Route by cost, latency, or quality</li>
-              <li>Unified logging and control</li>
-            </ul>
+          <article class="card">
+            <div class="ic c" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h3>Risk reports</h3>
+            <p>Drawdown, volatility, exposure, and scenario breakdowns — so you understand the downside before you ever think about the upside.</p>
+          </article>
+          <article class="card">
+            <div class="ic d" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
+            <h3>Data pipelines</h3>
+            <p>Curated, reproducible market and on-chain data feeding research and backtests — so results are consistent and re-runnable.</p>
+          </article>
+          <article class="card">
+            <div class="ic e" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 9h6M8 13h8M8 17h5"/></svg></div>
+            <h3>Strategy research subscriptions</h3>
+            <p>Follow research strategies and get notified on state changes. No auto-trading, no custody — we never touch your funds or exchange keys.</p>
+          </article>
+          <article class="card" style="display:flex;flex-direction:column;justify-content:center;background:linear-gradient(160deg,#f7f8ff,#eef0ff);border-color:rgba(99,102,241,.25)">
+            <h3 style="margin-bottom:8px">Early access is opening soon</h3>
+            <p style="margin-bottom:16px">We onboard people from the waitlist as features stabilize.</p>
+            <a class="btn btn-primary" href="mailto:contact@aetherforge.bond?subject=Join%20the%20AetherForge%20waitlist" style="align-self:flex-start">Join the waitlist</a>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- BUILT FOR PRODUCTION STRIP -->
-    <section class="strip">
+    <!-- HOW IT WORKS -->
+    <section id="how" class="muted-sec">
       <div class="container">
-        <div class="grid-4">
-          <div class="stat">
-            <div class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
-            <div class="k">Model-agnostic</div>
-            <div class="v">Bring any foundation model</div>
+        <div class="section-head center">
+          <span class="eyebrow">How it works</span>
+          <h2>From raw data to a decision you can defend</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="n">1</div><b>Ingest</b><span>Market &amp; on-chain data is collected into clean, reproducible pipelines.</span></div>
+          <div class="step"><div class="n">2</div><b>Backtest</b><span>Strategies run against history with explicit fees, slippage, and assumptions.</span></div>
+          <div class="step"><div class="n">3</div><b>Analyze</b><span>Signals and risk metrics (drawdown, volatility, exposure) are generated.</span></div>
+          <div class="step"><div class="n">4</div><b>Deliver</b><span>Results reach you through an API-first dashboard, reports, and alerts.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HONEST BY DESIGN -->
+    <section>
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Honest by design</span>
+          <h2>Built to be trusted, not hyped</h2>
+        </div>
+        <div class="honest">
+          <div class="item">
+            <h3>🔬 Methodology over hype</h3>
+            <p>We publish how every backtest is run, including its assumptions and limitations. Backtests are historical simulations — past performance never guarantees future results.</p>
           </div>
-          <div class="stat">
-            <div class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
-            <div class="k">API-first</div>
-            <div class="v">Integrate into any stack</div>
+          <div class="item">
+            <h3>🛟 You stay in control</h3>
+            <p>AetherForge is research and tooling. It does not place trades, manage money, hold custody, or give personalized financial advice. Every decision is yours.</p>
           </div>
-          <div class="stat">
-            <div class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"/></svg></div>
-            <div class="k">Secure by default</div>
-            <div class="v">Guardrails and access control</div>
-          </div>
-          <div class="stat">
-            <div class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
-            <div class="k">Scales on demand</div>
-            <div class="v">Cloud-native, elastic compute</div>
+          <div class="item">
+            <h3>🌱 Early &amp; transparent</h3>
+            <p>We're an independent, self-funded early-stage project. We're pre-launch and growing in the open — no fabricated users, returns, team, or funding here.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
+    <!-- RISK BANNER -->
+    <section style="padding-top:0">
       <div class="container">
-        <div class="contact-card">
-          <span class="eyebrow" style="color:#d6dbff;background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.18);">Contact</span>
-          <h2>Let's build together</h2>
-          <p>
-            We're partnering with a small group of early design partners. Reach out
-            for a demo or to get early access to the platform.
-          </p>
-          <div class="contact-actions">
-            <a class="btn btn-primary" href="mailto:contact@aetherforge.bond">Email the team</a>
-            <a class="btn btn-on-dark" href="mailto:contact@aetherforge.bond?subject=Early%20access%20request">Request early access</a>
-          </div>
-          <div>
-            <span class="email-pill" aria-label="Contact email">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-              contact@aetherforge.bond
-            </span>
-          </div>
+        <div class="risk">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.3 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg>
+          <div><b>Risk disclaimer.</b> AetherForge provides research, tooling, and educational information only — <b>not financial, investment, or trading advice</b>. Crypto assets are highly volatile and you can lose all of your capital. Backtests are historical simulations and do not guarantee future results. Always do your own research. Read the full <a href="disclaimer.html" style="color:#7c2d12;text-decoration:underline">Risk Disclaimer</a>.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WAITLIST CTA -->
+    <section id="waitlist" style="padding-top:0">
+      <div class="container">
+        <div class="cta-card">
+          <span class="eyebrow" style="color:#d6dbff;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)">Early access</span>
+          <h2>Join the waitlist</h2>
+          <p>We're inviting independent traders and researchers as features stabilize. Drop us a line and we'll reach out when your spot opens.</p>
+          <a class="btn btn-primary" href="mailto:contact@aetherforge.bond?subject=Join%20the%20AetherForge%20waitlist">Join the early-access waitlist</a>
+          <div><span class="email-pill" aria-label="Contact email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> contact@aetherforge.bond</span></div>
         </div>
       </div>
     </section>
@@ -504,37 +160,32 @@
 
   <!-- FOOTER -->
   <footer class="site">
-    <div class="container foot">
-      <div class="brand" style="font-size:16px;">
-        <span class="mark" aria-hidden="true" style="width:26px;height:26px;border-radius:8px;">
-          <svg viewBox="0 0 24 24" fill="none" style="width:15px;height:15px;"><path d="M12 3 L21 21 H3 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg>
-        </span>
-        AetherForge
+    <div class="container">
+      <div class="foot">
+        <div class="brand" style="font-size:16px">
+          <span class="mark" aria-hidden="true" style="width:26px;height:26px;border-radius:8px"><svg viewBox="0 0 24 24" fill="none" style="width:15px;height:15px"><path d="M12 3 L21 21 H3 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+          AetherForge
+        </div>
+        <div class="foot-links">
+          <a href="#product">Product</a>
+          <a href="disclaimer.html">Risk Disclaimer</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+          <a href="mailto:contact@aetherforge.bond">contact@aetherforge.bond</a>
+        </div>
       </div>
-      <div class="foot-links">
-        <a href="#about">About</a>
-        <a href="#use-cases">Use Cases</a>
-        <a href="#contact">Contact</a>
-        <a href="mailto:contact@aetherforge.bond">contact@aetherforge.bond</a>
-      </div>
-      <div class="muted">© <span id="year">2026</span> AetherForge. All rights reserved.</div>
+      <p class="foot-note">AetherForge is an independent, self-funded early-stage project based in Japan. It is not a registered company and is not a broker, exchange, investment adviser, or custodian. All content is provided for research and educational purposes only and is <b>not financial, investment, or trading advice</b>. Crypto assets are high-risk.</p>
+      <p class="muted" style="margin-top:14px">© <span id="year">2026</span> AetherForge. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
-    // Mobile nav toggle
-    (function () {
-      var toggle = document.getElementById('navToggle');
-      var links = document.getElementById('navLinks');
-      toggle.addEventListener('click', function () {
-        var open = links.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-      links.addEventListener('click', function (e) {
-        if (e.target.tagName === 'A') links.classList.remove('open');
-      });
-      // Current year
-      document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+      t.addEventListener('click',function(){var o=l.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false')});
+      l.addEventListener('click',function(e){if(e.target.tagName==='A')l.classList.remove('open')});
+      document.getElementById('year').textContent=new Date().getFullYear();
     })();
   </script>
 </body>

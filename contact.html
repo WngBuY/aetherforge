@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — AetherForge</title>
+  <meta name="description" content="Get in touch with AetherForge — an independent, early-stage crypto strategy research project based in Japan." />
+  <meta name="robots" content="all" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M16 6 L25 24 H7 Z' fill='none' stroke='white' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" aria-label="AetherForge home">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L21 21 H3 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+        AetherForge
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a class="link" href="/#product">Product</a>
+        <a class="link" href="/#how">How it works</a>
+        <a class="link" href="disclaimer.html">Risk Disclaimer</a>
+        <a class="link" href="contact.html">Contact</a>
+        <a class="btn btn-primary" href="mailto:contact@aetherforge.bond?subject=Join%20the%20AetherForge%20waitlist">Join the waitlist</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <header class="doc-header">
+    <div class="container">
+      <h1>Contact</h1>
+      <div class="updated">We'd love to hear from independent traders and researchers.</div>
+    </div>
+  </header>
+
+  <article class="prose">
+    <div class="callout"><b>Email is the best way to reach us:</b> <a href="mailto:contact@aetherforge.bond">contact@aetherforge.bond</a>. To join early access, send a note with the subject "Join the waitlist" — we'll reach out as spots open.</div>
+
+    <h2>Get in touch</h2>
+    <p>Whether you want early access, have feedback on the research, or just want to say hello, send us an email:</p>
+    <p style="margin:18px 0">
+      <a class="btn btn-primary" href="mailto:contact@aetherforge.bond?subject=Join%20the%20AetherForge%20waitlist">Join the early-access waitlist</a>
+      &nbsp;
+      <a class="btn btn-ghost" href="mailto:contact@aetherforge.bond">Email us</a>
+    </p>
+
+    <h2>About AetherForge</h2>
+    <p>AetherForge is an <b>independent, self-funded early-stage project</b> based in <b>Japan</b>, building research and tooling for individual crypto traders and quants — backtesting, signal monitoring, risk reports, data pipelines, and strategy research. It is run by an individual founder <span class="todo">[TODO: legal name — e.g., Wang Binyu — confirm whether to display publicly]</span> and is <b>not a registered company</b>.</p>
+    <p>AetherForge is not a broker, exchange, investment adviser, or custodian, and provides research and educational tools only — not financial advice. Please read our <a href="disclaimer.html">Risk Disclaimer</a>.</p>
+
+    <h2>Details</h2>
+    <ul>
+      <li><b>Project:</b> AetherForge</li>
+      <li><b>Website:</b> aetherforge.bond</li>
+      <li><b>Email:</b> <a href="mailto:contact@aetherforge.bond">contact@aetherforge.bond</a></li>
+      <li><b>Based in:</b> Japan</li>
+      <li><b>Stage:</b> Early access / waitlist</li>
+    </ul>
+  </article>
+
+  <footer class="site">
+    <div class="container">
+      <div class="foot">
+        <div class="brand" style="font-size:16px">
+          <span class="mark" aria-hidden="true" style="width:26px;height:26px;border-radius:8px"><svg viewBox="0 0 24 24" fill="none" style="width:15px;height:15px"><path d="M12 3 L21 21 H3 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+          AetherForge
+        </div>
+        <div class="foot-links">
+          <a href="/#product">Product</a>
+          <a href="disclaimer.html">Risk Disclaimer</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+          <a href="mailto:contact@aetherforge.bond">contact@aetherforge.bond</a>
+        </div>
+      </div>
+      <p class="foot-note">AetherForge is an independent, self-funded early-stage project based in Japan. It is not a registered company and is not a broker, exchange, investment adviser, or custodian. All content is for research and educational purposes only and is <b>not financial, investment, or trading advice</b>.</p>
+      <p class="muted" style="margin-top:14px">© <span id="year">2026</span> AetherForge. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>(function(){var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');t.addEventListener('click',function(){var o=l.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false')});l.addEventListener('click',function(e){if(e.target.tagName==='A')l.classList.remove('open')});document.getElementById('year').textContent=new Date().getFullYear();})();</script>
+</body>
+</html>
