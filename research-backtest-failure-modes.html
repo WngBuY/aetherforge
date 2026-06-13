@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Six ways crypto backtests lie — AetherForge Research</title>
+  <meta name="description" content="Look-ahead bias, survivorship, fee fantasy, regime overfitting, multiple testing, and capacity illusions — six failure modes that make most crypto backtests untrustworthy, and the controls AetherForge applies by default." />
+  <meta name="robots" content="all" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M16 6 L25 24 H7 Z' fill='none' stroke='white' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" aria-label="AetherForge home">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L21 21 H3 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+        AetherForge
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a class="link" href="/#product">Product</a>
+        <a class="link" href="research.html">Research</a>
+        <a class="link" href="disclaimer.html">Risk Disclaimer</a>
+        <a class="link" href="contact.html">Contact</a>
+        <a class="btn btn-primary" href="waitlist.html">Request early access</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <header class="doc-header">
+    <div class="container">
+      <h1>Six ways crypto backtests lie — and the checks we run against every one of them</h1>
+      <div class="updated">Research note · June 2026 · Methodology</div>
+    </div>
+  </header>
+
+  <article class="prose">
+    <div class="callout">A backtest is an argument, not a fact. This note lists the six failure modes we see most often in published crypto strategies, and the concrete controls AetherForge applies by default. Educational research — <b>not financial advice</b>.</div>
+
+    <h2>1. Look-ahead bias</h2>
+    <p>The strategy "knows" something before it could have known it: signals computed on the full day's data but traded at the open, indicators using a candle's close while entering inside the same candle, or settlement references fetched from a different (faster) feed than the venue actually uses.</p>
+    <p><b>Our control:</b> every input carries an explicit availability timestamp, and the replay engine refuses to read data stamped after the simulated decision time. Settlement always uses the venue's own reference feed.</p>
+
+    <h2>2. Survivorship bias</h2>
+    <p>Testing on today's top-100 coins means testing on the winners. The coins that collapsed, were delisted, or got hacked quietly vanish from the sample — and with them, most of the catastrophic losses your strategy would have eaten in real time.</p>
+    <p><b>Our control:</b> universes are reconstructed as-of each historical date, including assets that later died. If point-in-time membership can't be established, the result is labelled accordingly.</p>
+
+    <h2>3. Fee fantasy</h2>
+    <p>Many published backtests assume zero fees, zero spread, and perfect fills at mid-price. On high-turnover crypto strategies, realistic costs routinely turn a "60% annual return" into a loss. The faster the strategy, the bigger the lie.</p>
+    <p><b>Our control:</b> every backtest report states its fee schedule, spread model, and fill assumptions next to the headline number — and includes a sensitivity row showing what happens when costs double. If a strategy dies when fees double, you should know that before risking anything.</p>
+
+    <h2>4. Regime overfitting</h2>
+    <p>A strategy tuned on 2024–2025 data is, silently, a bet that the future resembles 2024–2025. Crypto regimes shift violently: volatility compresses, funding flips, market microstructure changes when fee schedules or tick sizes change.</p>
+    <p><b>Our control:</b> we report performance split by volatility regime and by calendar period, not just one aggregate curve. A strategy that only worked in one regime is presented as exactly that.</p>
+
+    <h2>5. Multiple testing</h2>
+    <p>Test 200 parameter combinations and the best one will look brilliant by pure chance. Most "discovered" edges are this — the survivor of a silent search the reader never sees.</p>
+    <p><b>Our control:</b> we log how many variants were tried and report it. Out-of-sample windows are held back before the search starts, and an edge that only exists in the searched window is treated as noise.</p>
+
+    <h2>6. Capacity illusions</h2>
+    <p>A signal that earns 2% per trade on $100 positions usually cannot earn it on $10,000 positions — the order book simply isn't deep enough, and your own order moves the price. Backtests that ignore book depth scale fictional profits linearly.</p>
+    <p><b>Our control:</b> replays consume recorded order-book depth, so simulated fills degrade the way real ones do. Reports state the size at which the result was simulated.</p>
+
+    <h2>The meta-rule</h2>
+    <p>Every AetherForge research report carries the same three boxes: <b>assumptions</b> (what we took as given), <b>data window</b> (what history it saw), and <b>what would falsify this</b> (what future evidence should change your mind). If a result can't fill in those boxes, it doesn't ship.</p>
+
+    <h2>Read more</h2>
+    <p>See the data foundation these controls rest on in <a href="research-data-pipelines.html">Building crypto data pipelines you can actually trust</a>, or <a href="waitlist.html">join the waitlist</a> to get full research as it ships.</p>
+
+    <div class="callout" style="border-left-color:#b45309;background:#fff7ed">Backtests are historical simulations; past performance never guarantees future results. Crypto assets are high-risk — you can lose all of your capital. Read the full <a href="disclaimer.html">Risk Disclaimer</a>.</div>
+  </article>
+
+  <footer class="site">
+    <div class="container">
+      <div class="foot">
+        <div class="brand" style="font-size:16px">
+          <span class="mark" aria-hidden="true" style="width:26px;height:26px;border-radius:8px"><svg viewBox="0 0 24 24" fill="none" style="width:15px;height:15px"><path d="M12 3 L21 21 H3 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+          AetherForge
+        </div>
+        <div class="foot-links">
+          <a href="/#product">Product</a>
+          <a href="research.html">Research</a>
+          <a href="disclaimer.html">Risk Disclaimer</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <p class="foot-note">AetherForge is an independent, self-funded early-stage project based in Japan. It is not a registered company and is not a broker, exchange, investment adviser, or custodian. All content is for research and educational purposes only and is <b>not financial, investment, or trading advice</b>. Crypto assets are high-risk.</p>
+      <p class="muted" style="margin-top:14px">© <span id="year">2026</span> AetherForge. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>(function(){var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');t.addEventListener('click',function(){var o=l.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false')});l.addEventListener('click',function(e){if(e.target.tagName==='A')l.classList.remove('open')});document.getElementById('year').textContent=new Date().getFullYear();})();</script>
+</body>
+</html>

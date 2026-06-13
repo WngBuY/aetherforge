@@ -14,6 +14,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="canonical" href="https://aetherforge.bond/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AetherForge",
+    "url": "https://aetherforge.bond",
+    "email": "contact@aetherforge.bond",
+    "description": "Research-and-tooling platform for independent crypto traders and quants: backtesting, signal monitoring, risk reports, and data pipelines. Educational research tools — not financial advice.",
+    "foundingDate": "2026",
+    "areaServed": "Worldwide",
+    "knowsAbout": ["crypto market research", "backtesting", "quantitative trading tools", "risk analytics"]
+  }
+  </script>
+  <script>if('IntersectionObserver' in window)document.documentElement.classList.add('js-anim');</script>
 </head>
 <body>
 
@@ -27,6 +42,7 @@
       <nav class="nav-links" id="navLinks">
         <a class="link" href="#product">Product</a>
         <a class="link" href="#how">How it works</a>
+        <a class="link" href="research.html">Research</a>
         <a class="link" href="disclaimer.html">Risk Disclaimer</a>
         <a class="link" href="contact.html">Contact</a>
         <a class="btn btn-primary" href="waitlist.html">Request early access</a>
@@ -134,6 +150,30 @@
       </div>
     </section>
 
+    <!-- RESEARCH NOTES -->
+    <section id="research" class="muted-sec">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Research, in the open</span>
+          <h2>Sample research notes</h2>
+          <p class="lead" style="margin:0 auto;">Don't take our word for it — read how we actually work. Public methodology notes, including the negative results most people never publish.</p>
+        </div>
+        <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+          <article class="card">
+            <h3><a href="research-data-pipelines.html">Crypto data pipelines you can actually trust</a></h3>
+            <p style="margin-bottom:12px">Immutable raws, point-in-time joins, venue-aligned references, documented gaps, versioned derivations, deterministic replays — the engineering rules every result here is built on.</p>
+            <p class="muted" style="margin:0">Methodology</p>
+          </article>
+          <article class="card">
+            <h3><a href="research-backtest-failure-modes.html">Six ways crypto backtests lie</a></h3>
+            <p style="margin-bottom:12px">Look-ahead bias, survivorship, fee fantasy, regime overfitting, multiple testing, capacity illusions — and the concrete checks we run against every one of them, on every report.</p>
+            <p class="muted" style="margin:0">Methodology</p>
+          </article>
+        </div>
+        <div style="text-align:center;margin-top:30px"><a class="btn btn-ghost" href="research.html">All research notes →</a></div>
+      </div>
+    </section>
+
     <!-- RISK BANNER -->
     <section style="padding-top:0">
       <div class="container">
@@ -169,6 +209,7 @@
         </div>
         <div class="foot-links">
           <a href="#product">Product</a>
+          <a href="research.html">Research</a>
           <a href="disclaimer.html">Risk Disclaimer</a>
           <a href="privacy.html">Privacy</a>
           <a href="terms.html">Terms</a>
@@ -187,6 +228,26 @@
       t.addEventListener('click',function(){var o=l.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false')});
       l.addEventListener('click',function(e){if(e.target.tagName==='A')l.classList.remove('open')});
       document.getElementById('year').textContent=new Date().getFullYear();
+
+      // sticky nav gains a shadow once scrolled
+      var nav=document.querySelector('header.nav');
+      var onScroll=function(){nav.classList.toggle('scrolled',window.scrollY>8)};
+      window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+      // scroll-reveal entrance animations (safe: only if js-anim was set)
+      if(document.documentElement.classList.contains('js-anim')){
+        var els=document.querySelectorAll('.section-head,.card,.step,.honest .item,.risk,.cta-card');
+        try{
+          var io=new IntersectionObserver(function(entries){
+            entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io.unobserve(en.target)}});
+          },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+          els.forEach(function(el){
+            var sibs=el.parentElement?[].indexOf.call(el.parentElement.children,el):0;
+            el.style.transitionDelay=Math.min(sibs,5)*60+'ms';
+            io.observe(el);
+          });
+        }catch(err){els.forEach(function(el){el.classList.add('is-in')});}
+      }
     })();
   </script>
 </body>

@@ -131,3 +131,42 @@ footer.site{border-top:1px solid var(--line);padding:48px 0 40px;background:#fff
   .cta-card{padding:40px 22px}
 }
 @media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* ── polish pass ─────────────────────────────────────────── */
+/* anchor offset so the sticky nav doesn't cover section tops */
+section[id]{scroll-margin-top:84px}
+
+/* branded text selection */
+::selection{background:rgba(99,102,241,.22);color:var(--ink)}
+.hero ::selection,.cta-card ::selection,.doc-header ::selection{background:rgba(167,139,250,.38);color:#fff}
+
+/* visible keyboard-focus rings */
+a:focus-visible,.btn:focus-visible,.nav-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:10px}
+.btn-on-dark:focus-visible,.cta-card .btn:focus-visible,.hero a:focus-visible{outline-color:#c4b5fd}
+
+/* sticky nav gains depth once you scroll */
+header.nav.scrolled{box-shadow:0 10px 28px -18px rgba(15,23,42,.5)}
+
+/* card icon micro-interaction */
+.card .ic{transition:transform .18s ease}
+.card:hover .ic{transform:translateY(-2px) scale(1.06)}
+
+/* scroll reveal — only when JS detected motion is welcome */
+@media (prefers-reduced-motion:no-preference){
+  html.js-anim .section-head,
+  html.js-anim .card,
+  html.js-anim .step,
+  html.js-anim .honest .item,
+  html.js-anim .risk,
+  html.js-anim .cta-card{
+    opacity:0;transform:translateY(22px);
+    transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)
+  }
+  html.js-anim .is-in{opacity:1 !important;transform:none !important}
+}
+
+/* respect reduced-motion: drop hover lifts and smooth-scroll */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .btn:hover,.card:hover,.btn-ghost:hover,.btn-on-dark:hover,.card:hover .ic{transform:none}
+}

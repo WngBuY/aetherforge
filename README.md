@@ -20,13 +20,18 @@ Live site: **https://aetherforge.bond** · Contact: **contact@aetherforge.bond**
 ## Pages
 
 ```
-index.html       Homepage
-disclaimer.html  Risk Disclaimer / Not Financial Advice
-privacy.html     Privacy Policy
-terms.html       Terms of Service (governed by the laws of Japan)
-contact.html     Contact + project identity
-style.css        Shared styles
-CNAME            Custom domain (aetherforge.bond)
+index.html                            Homepage
+research.html                         Research notes index
+research-data-pipelines.html          Note: reproducible market-data pipeline principles
+research-backtest-failure-modes.html  Note: six backtest failure modes & our controls
+waitlist.html                         Early-access waitlist (email-based)
+disclaimer.html                       Risk Disclaimer / Not Financial Advice
+privacy.html                          Privacy Policy
+terms.html                            Terms of Service (governed by the laws of Japan)
+contact.html                          Contact + project identity
+style.css                             Shared styles
+sitemap.xml / robots.txt              SEO basics
+CNAME                                 Custom domain (aetherforge.bond)
 ```
 
 No build step and no dependencies — plain static HTML/CSS, hosted on **GitHub Pages**.
